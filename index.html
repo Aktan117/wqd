@@ -1,38 +1,70 @@
-<!DOCTYPE html>
-<html lang="kk">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Жеңілдік калькуляторы</title>
-  <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-  <div class="box">
-    <h3>ЖЕҢІЛДІК КАЛЬКУЛЯТОРЫ</h3>
-    <p>Баға:</p>
-    <input id="price" readonly><br>
-    <p>Пайыз:</p>
-    <input id="discount" readonly><br>
-    <p>Нәтиже:</p>
-    <input id="result" readonly><br><br>
-    <button class="mode-btn" onclick="setMode('price')">Баға енгізу</button>
-    <button class="mode-btn" onclick="setMode('discount')">Пайыз енгізу</button><br><br>
-    <div class="buttons">
-      <button onclick="press('1')">1</button>
-      <button onclick="press('2')">2</button>
-      <button onclick="press('3')">3</button>
-      <button onclick="press('4')">4</button>
-      <button onclick="press('5')">5</button>
-      <button onclick="press('6')">6</button>
-      <button onclick="press('7')">7</button>
-      <button onclick="press('8')">8</button>
-      <button onclick="press('9')">9</button>
-      <button id="clear" onclick="clearAll()">C</button>
-      <button onclick="press('0')">0</button>
-      <button onclick="backspace()">⌫</button>
-      <button id="calc" onclick="calculate()">=</button>
-    </div>
-  </div>
-  <script src="./scriot.js"></script>
-</body>
-</html>
+let mode = 'price'; // Алдымен баға енгізіледі
+
+function setMode(m) {
+  mode = m;
+}
+
+function press(num) {
+  if (mode === 'price') {
+    document.getElementById('price').value += num;
+  } else {
+    document.getElementById('discount').value += num;
+  }
+}
+
+function clearAll() {
+  document.getElementById('price').value = '';
+  document.getElementById('discount').value = '';
+  document.getElementById('result').value = '';
+}
+
+// 🔙 ТЕК СОҢҒЫ САНДЫ ӨШІРУ
+function backspace() {
+  if (mode === 'price') {
+    let price = document.getElementById('price').value;
+    document.getElementById('price').value = price.slice(0, -1);
+  } else {
+    let discount = document.getElementById('discount').value;
+    document.getElementById('discount').value = discount.slice(0, -1);
+  }
+}
+
+function calculate() {
+  let price = parseFloat(document.getElementById('price').value);
+  let discount = parseFloat(document.getElementById('discount').value);
+
+  if (isNaN(price) || isNaN(discount)) {
+    document.getElementById('result').value = 'Қате!';
+    return;
+  }
+
+  let finalPrice = price - (price * discount / 100);
+  document.getElementById('result').value = finalPrice.toFixed(2) + ' ₸';
+}
+
+
+const CACHE_NAME = 'my-site-cache-v1';
+const urlsToCache = [
+  '/',
+  '/wqd/',
+  '/wqd/index.html',
+  '/wqd/style.css',
+  '/wqd/script.js',
+  '/wqd/icon-192.png',
+  '/wqd/icon-512.png'
+];
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(urlsToCache))
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      return response || fetch(event.request);
+    })
+  );
+});
