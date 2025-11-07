@@ -1,0 +1,50 @@
+body {
+  font-family: Arial;
+  background-color: #fafafa;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.box {
+  border: 2px solid black;
+  display: inline-block;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+input {
+  width: 200px;
+  height: 30px;
+  font-size: 18px;
+  margin: 5px;
+  text-align: right;
+}
+
+button {
+  width: 60px;
+  height: 40px;
+  font-size: 18px;
+  margin: 4px;
+  cursor: pointer;
+}
+
+.mode-btn {
+  background-color: lightgreen;
+  width: 130px;
+}
+
+#calc {
+  background-color: yellow;
+}
+
+#clear {
+  background-color: lightcoral;
+}
+
+.buttons {
+  width: 210px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto auto auto;
+}

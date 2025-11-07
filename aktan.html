@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Жеңілдік калькуляторы</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="box">
+    <h3>ЖЕҢІЛДІК КАЛЬКУЛЯТОРЫ</h3>
+    <p>Баға:</p>
+    <input id="price" readonly><br>
+    <p>Пайыз:</p>
+    <input id="discount" readonly><br>
+    <p>Нәтиже:</p>
+    <input id="result" readonly><br><br>
+    <button class="mode-btn" onclick="setMode('price')">Баға енгізу</button>
+    <button class="mode-btn" onclick="setMode('discount')">Пайыз енгізу</button><br><br>
+    <div class="buttons">
+      <button onclick="press('1')">1</button>
+      <button onclick="press('2')">2</button>
+      <button onclick="press('3')">3</button>
+      <button onclick="press('4')">4</button>
+      <button onclick="press('5')">5</button>
+      <button onclick="press('6')">6</button>
+      <button onclick="press('7')">7</button>
+      <button onclick="press('8')">8</button>
+      <button onclick="press('9')">9</button>
+      <button id="clear" onclick="clearAll()">C</button>
+      <button onclick="press('0')">0</button>
+      <button onclick="backspace()">⌫</button>
+      <button id="calc" onclick="calculate()">=</button>
+    </div>
+  </div>
+  <script src="./scriot.js"></script>
+</body>
+</html>
